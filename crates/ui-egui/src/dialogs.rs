@@ -47,7 +47,7 @@ fn title(id: &str) -> &'static str {
         "paragraph" => "Paragraph",
         "tabs" => "Tabs",
         "font" => "Font",
-        "about" => "About DeckCraft",
+        "about" => "About DuyLong Powerpoint",
         "preferences" => "Preferences",
         "autocorrect" => "AutoCorrect",
         "gridOptions" => "Grid Options",
@@ -68,10 +68,10 @@ fn title(id: &str) -> &'static str {
         "smartart" => "Choose a SmartArt Graphic",
         "bullets" => "Bullets and Numbering",
         "action" => "Action Settings",
-        "quit" => "DeckCraft",
+        "quit" => "DuyLong Powerpoint",
         "themeColors" => "Create New Theme Colors",
         "themeFonts" => "Create New Theme Fonts",
-        _ => "DeckCraft",
+        _ => "DuyLong Powerpoint",
     }
 }
 
@@ -274,7 +274,7 @@ fn album_choice(ui: &mut Ui, d: &mut Dialog, id: &str, key: &str, default: &str,
     opened.response.widget_info(|| egui::WidgetInfo::labeled(egui::WidgetType::ComboBox, true, label));
 }
 
-const ALBUM_THEMES: &[&str] = &["DeckCraft", "Harbor", "Ember", "Meadow", "Nocturne", "Paper", "Coral Reef", "Slate"];
+const ALBUM_THEMES: &[&str] = &["DuyLong Powerpoint", "Harbor", "Ember", "Meadow", "Nocturne", "Paper", "Coral Reef", "Slate"];
 
 fn current_theme(app: &SlideApp) -> String {
     app.session
@@ -282,7 +282,7 @@ fn current_theme(app: &SlideApp) -> String {
         .and_then(|d| d.doc.masters.first())
         .map(|m| m.theme.name.clone())
         .filter(|n| !n.is_empty())
-        .unwrap_or_else(|| "DeckCraft".into())
+        .unwrap_or_else(|| "DuyLong Powerpoint".into())
 }
 
 fn album_json_id(v: &Value) -> Option<u64> {
@@ -465,7 +465,7 @@ fn photo_album_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         check(ui, d, "Captions under pictures", "captions", false);
         check(ui, d, "ALL pictures black and white", "grayscale", false);
         ui.label("Album theme");
-        album_choice(ui, d, "album_theme", "theme", "DeckCraft", &ALBUM_THEMES.iter().map(|n| (*n, *n)).collect::<Vec<_>>());
+        album_choice(ui, d, "album_theme", "theme", "DuyLong Powerpoint", &ALBUM_THEMES.iter().map(|n| (*n, *n)).collect::<Vec<_>>());
     });
     let captions = d.fields.get("captions").is_some_and(|v| v == "1");
     let grayscale = d.fields.get("grayscale").is_some_and(|v| v == "1");
@@ -482,7 +482,7 @@ fn photo_album_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         }
         let layout = d.get("layout", "1");
         let frame = d.get("frame", "rect");
-        let theme = d.get("theme", "DeckCraft");
+        let theme = d.get("theme", "DuyLong Powerpoint");
         let theme_was = d.fields.get("themeWas").cloned().unwrap_or_default();
         let mut payload = json!({"pictures": list, "layout": layout, "frame": frame, "captions": captions, "grayscale": grayscale});
         if theme != theme_was
@@ -2080,9 +2080,11 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             ok || cancel
         }
         "about" => {
-            let tab = d.get("tab", "about");
+            let mut tab = d.get("tab", "about");
+            if (tab == "contributors" && !false) || (tab == "models" && !false) { tab = "about".into(); }
             ui.horizontal(|ui| {
                 for (k, l) in [("about", "About"), ("contributors", "Contributors"), ("models", "Models")] {
+                    if (k == "contributors" && !false) || (k == "models" && !false) { continue; }
                     if ui.selectable_label(tab == k, l).clicked() {
                         d.fields.insert("tab".into(), k.into());
                     }
@@ -2094,7 +2096,7 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                     // The credits need room for the table; the About tab keeps its compact size.
                     ui.set_min_size(vec2(640.0, 380.0));
                     ui.set_max_height(380.0);
-                    if tab == "models" { crate::credits::models_ui(ui) } else { crate::credits::contributors_ui(ui) }
+                    egui::ScrollArea::horizontal().id_salt("craft-about-deck-credits").show(ui, |ui| { if tab == "models" { crate::credits::models_ui(ui) } else { crate::credits::contributors_ui(ui) } });
                 }
                 _ => about(app, ui),
             }
@@ -2621,15 +2623,13 @@ pub fn about(_app: &mut SlideApp, ui: &mut Ui) {
     ui.vertical_centered(|ui| {
         let (r, _) = ui.allocate_exact_size(vec2(64.0, 64.0), Sense::hover());
         paint_logo(ui.painter(), r);
-        ui.label(egui::RichText::new("DeckCraft").font(theme::bold(22.0)));
+        ui.label(egui::RichText::new("DuyLong Powerpoint").font(theme::bold(22.0)));
         ui.label(egui::RichText::new(version_line()).color(t.text_dim));
         ui.add_space(6.0);
-        ui.label("Presentations and slide shows, rebuilt from scratch in pure Rust.");
+        // Mô tả About đã được ẩn (chỉ giữ lại thông tin pháp lý bắt buộc).
         ui.label("An open-source, clean-room project. Not affiliated with Microsoft.");
         ui.add_space(6.0);
-        ui.hyperlink_to("Join our community on Discord", deckcraft_engine::links::DISCORD);
-        ui.hyperlink_to("getartcraft.com/apps/deckcraft", deckcraft_engine::links::APP_PAGE);
-        ui.hyperlink_to("Source on GitHub", deckcraft_engine::links::GITHUB);
+                // Không hiển thị link tùy chọn.
         ui.add_space(6.0);
         ui.label(egui::RichText::new("MIT OR Apache-2.0 · © 2026 ArtCraft Team and the DeckCraft contributors").size(11.0).color(t.text_faint));
     });

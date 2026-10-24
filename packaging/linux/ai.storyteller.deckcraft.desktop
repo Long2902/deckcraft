@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=DeckCraft
+Name=DuyLong Powerpoint
 GenericName=Presentation
-Comment=Create and present slide decks
+Comment=Thiết kế Slide
 Exec=deckcraft %F
 TryExec=deckcraft
 Icon=ai.storyteller.deckcraft

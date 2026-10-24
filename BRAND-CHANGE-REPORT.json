@@ -1,0 +1,35 @@
+{
+  "app": "deckcraft",
+  "display": "DuyLong Powerpoint",
+  "publisher": "Đỗ Duy Long",
+  "branch": "branding/duylong-powerpoint-20261024-193835",
+  "time": "20261024-193835",
+  "icon_assets": [
+    "assets/app-icon/deckcraft.ico",
+    "assets/app-icon/deckcraft-1024.png",
+    "assets/app-icon/hicolor/16x16/apps/ai.storyteller.deckcraft.png",
+    "assets/app-icon/hicolor/24x24/apps/ai.storyteller.deckcraft.png",
+    "assets/app-icon/hicolor/32x32/apps/ai.storyteller.deckcraft.png",
+    "assets/app-icon/hicolor/48x48/apps/ai.storyteller.deckcraft.png",
+    "assets/app-icon/hicolor/64x64/apps/ai.storyteller.deckcraft.png",
+    "assets/app-icon/hicolor/128x128/apps/ai.storyteller.deckcraft.png",
+    "assets/app-icon/hicolor/256x256/apps/ai.storyteller.deckcraft.png",
+    "assets/app-icon/hicolor/512x512/apps/ai.storyteller.deckcraft.png",
+    "assets/app-icon/deckcraft.icns",
+    "assets/app-icon/deckcraft.svg",
+    "assets/app-icon/hicolor/scalable/apps/ai.storyteller.deckcraft.svg"
+  ],
+  "patched": {
+    "apps/deckcraft/src/main.rs": 1,
+    "apps/deckcraft/build.rs": 3,
+    "crates/ui-egui/src/ribbon.rs": 2,
+    "crates/ui-egui/src/theme_colors_tests.rs": 1,
+    "crates/ui-egui/src/backstage.rs": 4,
+    "crates/ui-egui/src/effects_tests.rs": 2,
+    "crates/ui-egui/src/dialogs.rs": 8,
+    "packaging/linux/ai.storyteller.deckcraft.desktop": 2,
+    "packaging/windows/deckcraft.wxs": 17,
+    "packaging/macos/Info.plist.in": 5,
+    "packaging/linux/ai.storyteller.deckcraft.metainfo.xml.in": 1
+  }
+}

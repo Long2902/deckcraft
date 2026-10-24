@@ -1,0 +1,11 @@
+BRANDING RESIDUAL SCAN (not a compiled binary test)
+Review the listed code references before publishing as an independent product.
+References that only attribute the upstream authors may be retained.
+
+crates/ui-egui/src/backstage.rs:740: ui.hyperlink_to("Join the ArtCraft community on Discord", deckcraft_engine::links::DISCORD);
+crates/ui-egui/src/dialogs.rs:2634: ui.label(egui::RichText::new("MIT OR Apache-2.0 · © 2026 ArtCraft Team and the DeckCraft contributors").size(11.0).color(t.text_faint));
+crates/engine/src/links.rs:3: pub const DISCORD: &str = "https://discord.gg/artcraft";
+crates/engine/src/links.rs:4: pub const WEBSITE: &str = "https://getartcraft.com/";
+crates/engine/src/links.rs:5: pub const APPS: &str = "https://getartcraft.com/apps";
+crates/engine/src/links.rs:6: pub const APP_PAGE: &str = "https://getartcraft.com/apps/deckcraft";
+packaging/linux/ai.storyteller.deckcraft.metainfo.xml.in:29: <url type="contact">https://discord.gg/artcraft</url>
