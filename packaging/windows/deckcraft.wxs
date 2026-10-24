@@ -28,11 +28,13 @@
 
     <Icon Id="DeckcraftIcon.ico" SourceFile="$(var.IconPath)" />
     <Property Id="ARPPRODUCTICON" Value="DeckcraftIcon.ico" />
+    <Property Id="DESKTOPSHORTCUT" Value="1" Secure="yes" />
 
     <StandardDirectory Id="ProgramFiles6432Folder">
       <Directory Id="INSTALLFOLDER" Name="DuyLong Powerpoint" />
     </StandardDirectory>
     <StandardDirectory Id="ProgramMenuFolder" />
+    <StandardDirectory Id="DesktopFolder" />
 
     <Feature Id="Main" Title="DuyLong Powerpoint" Level="1">
       <ComponentGroupRef Id="DeckcraftFiles" />
@@ -72,6 +74,10 @@
       <Component Id="DeckcraftCli">
         <File Id="DeckcraftCliExe" Source="$(var.BinDir)\deckcraft-cli.exe" KeyPath="yes" />
       </Component>
-    </ComponentGroup>
+          <Component Id="CraftDesktopShortcutComponent" Directory="DesktopFolder" Condition="DESKTOPSHORTCUT = &quot;1&quot;">
+        <Shortcut Id="CraftDesktopShortcut" Name="DuyLong Powerpoint" Target="[#DeckcraftExe]" WorkingDirectory="INSTALLFOLDER" Icon="DeckcraftIcon.ico" IconIndex="0" />
+        <RegistryValue Root="HKMU" Key="Software\CraftSuite\Deckcraft\Installer" Name="DesktopShortcutComponent" Value="1" Type="integer" KeyPath="yes" />
+      </Component>
+</ComponentGroup>
   </Fragment>
 </Wix>
